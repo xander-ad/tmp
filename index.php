@@ -1,38 +1,18 @@
 <?php
-$res = false;
-$msg = false;
+set_include_path(get_include_path()
+    . PATH_SEPARATOR . 'application/controllers'
+    . PATH_SEPARATOR . 'application/models'
+    . PATH_SEPARATOR . 'application/views');
 
-$text = $_POST['text'] ?? false;
-$str = $_POST['str'] ?? false;
-if (is_string($text) && is_string($str)) {
-    $text = strip_tags($text);
-    $str = strip_tags($str);
-    $res = substr_count($text, $str) ?? 'Not found';
+const USER_DEFAULT_FILE = 'user_default.php';
+const USER_ROLE_FILE = 'user_role.php';
+const USER_LIST_FILE = 'user_list.php';
+const USER_ADD_FILE = 'user_add.php';
 
-}
-?>
+spl_autoload_register(function ($class_name) {
+    include $class_name . '.php';
+});
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tst</title>
-</head>
-<body>
-    <form action="" method="post">
-        <p>Text</p>
-        <textarea name="text" cols="50" rows="4" ><?=$text?></textarea><br>
-        <p>Find</p>
-        <input name="str" type="text" value="<?=$str?>">
-        <input type="submit" name="find">
-    </form>
-    <?php
-        if ($msg) {
-            echo "<p>Msg: $msg</p>";
-        }
-        if ($res) {
-            echo "<p>Result: $res</p>";
-        }
-    ?>
-</body>
-</html>
-
+$front = FrontController::getInstance();
+$front->route();
+echo $front->getBody();
