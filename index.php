@@ -8,6 +8,7 @@ const USER_DEFAULT_FILE = 'user_default.php';
 const USER_ROLE_FILE = 'user_role.php';
 const USER_LIST_FILE = 'user_list.php';
 const USER_ADD_FILE = 'user_add.php';
+const USER_FILE = 'users.txt';
 
 spl_autoload_register(function ($class_name) {
     include $class_name . '.php';

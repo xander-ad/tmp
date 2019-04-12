@@ -1,1 +1,1 @@
-<h1>Hello, <?php echo $this->name; ?>!</h1>
+<h1><?php echo $this->name; ?>!</h1>
